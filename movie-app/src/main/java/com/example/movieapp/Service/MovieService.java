@@ -1,4 +1,4 @@
-package com.example.movieapp;
+package com.example.movieapp.Service;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,6 +6,9 @@ import java.util.Optional;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.example.movieapp.Entity.Movie;
+import com.example.movieapp.Repository.MovieRepository;
 
 @Service
 public class MovieService {
