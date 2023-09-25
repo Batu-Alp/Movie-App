@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Document(collection = "movies")
+@Document(collection = "movie-app")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,7 +19,7 @@ public class Movie {
     @Id
     private ObjectId id;
 
-    private String imbdId;
+    private String imdbId;
 
     private String title;
 
