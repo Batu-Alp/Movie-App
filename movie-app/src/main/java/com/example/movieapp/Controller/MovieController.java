@@ -1,6 +1,7 @@
 package com.example.movieapp.Controller;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -52,6 +55,17 @@ public class MovieController {
     public ResponseEntity<List<Movie>> getMoviesSortedByReleaseDateNewestToOldest() {
         return new ResponseEntity<List<Movie>>(movieService.moviesSortedByReleaseDateNewestToOldest(),
                 HttpStatus.OK);
+    }
+
+    @PostMapping("/save")
+    public ResponseEntity<Movie> saveMovie(@RequestParam String imdbId, @RequestParam String title,
+            @RequestParam String releaseDate,
+            @RequestParam List<String> genres) {
+
+        return new ResponseEntity<Movie>(
+                movieService.createMovie(imdbId, title, releaseDate, genres),
+                HttpStatus.OK);
+
     }
 
     /*
