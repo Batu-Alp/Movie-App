@@ -1,5 +1,6 @@
 package com.example.movieapp.Controller;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -7,15 +8,19 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.movieapp.Entity.Movie;
+import com.example.movieapp.Entity.Review;
 import com.example.movieapp.Service.MovieService;
 
 @RestController
@@ -57,13 +62,72 @@ public class MovieController {
                 HttpStatus.OK);
     }
 
+    /*
+     * 
+     * @PostMapping("/save")
+     * public ResponseEntity<Movie> saveMovie(@RequestParam String
+     * imdbId, @RequestParam String title,
+     * 
+     * @RequestParam String releaseDate,
+     * 
+     * @RequestParam List<String> genres) {
+     * 
+     * return new ResponseEntity<Movie>(
+     * movieService.createMovie(imdbId, title, releaseDate, genres),
+     * HttpStatus.OK);
+     * 
+     * }
+     * 
+     */
+    /*
+     * @PostMapping("/save")
+     * public ResponseEntity<Movie> saveMovie(@RequestBody Map<String, String>
+     * payload) {
+     * 
+     * return new ResponseEntity<Movie>(
+     * movieService.createMovie(payload.get("imdbId"), payload.get("title"),
+     * payload.get("releaseDate"),
+     * payload.get("genres")),
+     * HttpStatus.OK);
+     * }
+     */
+
     @PostMapping("/save")
-    public ResponseEntity<Movie> saveMovie(@RequestParam String imdbId, @RequestParam String title,
-            @RequestParam String releaseDate,
-            @RequestParam List<String> genres) {
+    @ResponseStatus(HttpStatus.CREATED)
+    // @RequestBody String imdbId, String title, String releaseDate, List<String>
+    // genres
+    public ResponseEntity<Movie> saveMovie(@RequestBody Movie movie) {
+
+        // String imdbId = payload.get("imdbId");
+        // String title = payload.get("title");
+        // String releaseDate = payload.get("releaseDate");
+        // String genresString = payload.get("genres");
+        // List<String> genresList = Arrays.asList(payload.get("genres").split(","));
+
+        // genresString'i virgülle ayırarak bir liste oluşturun
+        // List<String> genres = Arrays.asList(genresString.split(","));
 
         return new ResponseEntity<Movie>(
-                movieService.createMovie(imdbId, title, releaseDate, genres),
+                movieService.createMovie(movie.getImdbId(), movie.getTitle(), movie.getReleaseDate(),
+                        movie.getGenres()),
+                HttpStatus.OK);
+
+    }
+
+    @DeleteMapping("/delete/{imdbId}")
+    public ResponseEntity<Movie> deleteMovie(@PathVariable(value = "imdbId") String imdbId) {
+
+        return new ResponseEntity<Movie>(
+                movieService.deleteMovie(imdbId),
+                HttpStatus.OK);
+
+    }
+
+    @PutMapping("/update/{imdbId}")
+    public ResponseEntity<Movie> updateMovie(@PathVariable(value = "imdbId") String imdbId, @RequestBody Movie movie) {
+
+        return new ResponseEntity<Movie>(
+                movieService.updateMovie(imdbId, movie),
                 HttpStatus.OK);
 
     }
