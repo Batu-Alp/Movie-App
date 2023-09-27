@@ -86,6 +86,17 @@ public class MovieService {
         return movie;
 
     }
+
+    public Movie deleteMovie(String imdbId) {
+
+        Optional<Movie> optionalMovie = movieRepository.getMovieByImdbId(imdbId);
+        Movie movies = optionalMovie.get();
+        ObjectId id = movies.getId();
+        movieRepository.deleteById(id);
+
+        return movies;
+
+    }
     /*
      * public Movie createMovie(String imdbId, String title, String releaseDate,
      * List<String> genres) {
