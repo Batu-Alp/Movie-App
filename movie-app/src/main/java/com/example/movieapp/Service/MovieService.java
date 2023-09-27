@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.example.movieapp.Entity.Movie;
+import com.example.movieapp.Entity.Review;
 import com.example.movieapp.Repository.MovieRepository;
 
 @Service
@@ -70,19 +71,38 @@ public class MovieService {
         return movies;
     }
 
+    // String imdbId, String title, String releaseDate, List<String> genres
     public Movie createMovie(String imdbId, String title, String releaseDate, List<String> genres) {
 
-        Movie movie = new Movie();
+        Movie movie = movieRepository.insert(new Movie(imdbId, title, releaseDate, genres));
 
-        movie.setImdbId(imdbId);
-        movie.setTitle(title);
-        movie.setReleaseDate(releaseDate);
-        movie.setGenres(genres);
+        // movie.setImdbId(imdbId);
+        // movie.setTitle(title);
+        // movie.setReleaseDate(releaseDate);
+        // movie.setGenres(genres);
 
-        movie = movieRepository.insert(movie);
-
+        // System.out.println("movie" + movie);
+        // return movieRepository.save(movie);
         return movie;
 
     }
+    /*
+     * public Movie createMovie(String imdbId, String title, String releaseDate,
+     * List<String> genres) {
+     * 
+     * Movie movie = new Movie();
+     * Movie movieFromDB = movieRepository.findById(null)
+     * 
+     * movie.setImdbId(imdbId);
+     * movie.setTitle(title);
+     * movie.setReleaseDate(releaseDate);
+     * movie.setGenres(genres);
+     * 
+     * movie = movieRepository.insert(movie);
+     * 
+     * return movie;
+     * 
+     * }
+     */
 
 }

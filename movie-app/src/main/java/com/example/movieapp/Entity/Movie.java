@@ -42,6 +42,14 @@ public class Movie {
         this.genres = genres;
     }
 
+    public ObjectId getId() {
+        return id;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
+
     public String getImdbId() {
         return imdbId;
     }
