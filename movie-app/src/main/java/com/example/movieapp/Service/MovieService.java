@@ -97,6 +97,20 @@ public class MovieService {
         return movies;
 
     }
+
+    public Movie updateMovie(String imdbId, Movie movie) {
+
+        Optional<Movie> optionalMovie = movieRepository.getMovieByImdbId(imdbId);
+        Movie movies = optionalMovie.get();
+
+        movies.setImdbId(movie.getImdbId());
+        movies.setTitle(movie.getTitle());
+        movies.setReleaseDate(movie.getReleaseDate());
+        movies.setGenres(movie.getGenres());
+
+        return movieRepository.save(movies);
+
+    }
     /*
      * public Movie createMovie(String imdbId, String title, String releaseDate,
      * List<String> genres) {

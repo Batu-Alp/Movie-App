@@ -42,6 +42,12 @@ public class Movie {
         this.genres = genres;
     }
 
+    public Movie(String title, String releaseDate, List<String> genres) {
+        this.title = title;
+        this.releaseDate = releaseDate;
+        this.genres = genres;
+    }
+
     public ObjectId getId() {
         return id;
     }
