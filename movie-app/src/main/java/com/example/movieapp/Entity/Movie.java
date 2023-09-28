@@ -33,7 +33,7 @@ public class Movie {
 
     private List<String> backdrops;
 
-    private List<Review> reviewId;
+    private List<Review> reviewIds;
 
     public Movie(String imdbId, String title, String releaseDate, List<String> genres) {
         this.imdbId = imdbId;
@@ -72,6 +72,14 @@ public class Movie {
 
     public void setGenres(List<String> genres) {
         this.genres = genres;
+    }
+
+    public List<Review> getReviewIds() {
+        return reviewIds;
+    }
+
+    public void setReviewIds(List<Review> reviewIds) {
+        this.reviewIds = reviewIds;
     }
 
 }

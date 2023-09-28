@@ -7,9 +7,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Document(collection = "movies")
+@Document(collection = "movie-app")
 @Data
-@AllArgsConstructor
+// @AllArgsConstructor
 @NoArgsConstructor
 public class Review {
 
@@ -19,6 +19,22 @@ public class Review {
     private String body;
 
     public Review(String body) {
+        this.body = body;
+    }
+
+    public ObjectId getId() {
+        return id;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
         this.body = body;
     }
 
